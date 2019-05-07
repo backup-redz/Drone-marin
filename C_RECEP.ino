@@ -1,4 +1,5 @@
 void recep (char lettre) {
+  delay(10);
   switch (lettre) {
     case'z':
     avant();
@@ -20,7 +21,6 @@ void recep (char lettre) {
     {
       char localCharac;
       Serial.print('E');
-      delay(10);
       while (Blt.available() > 0 ) {
         delay(8); // etre sur de recevoir le prochain char
         localCharac = Blt.read();
