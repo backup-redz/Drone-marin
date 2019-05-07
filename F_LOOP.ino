@@ -1,0 +1,21 @@
+void loop() {
+  // put your main code here, to run repeatedly:
+    
+  while (Blt.available() > 0) {
+    charac = Blt.read();
+    recep(charac);
+  }
+  while (Serial.available() > 0) {
+    charac2 = Serial.read();
+    //Blt.print( charac2 );
+    //recep(charac);
+  }
+  while (gps.available() > 0) {
+    if (gps.read() == '$') {
+      if (getGPSPos(&latitude, &longitude) == GPS_SUCCES) {
+        break; // si on a obtenu une nouvelle pos GPS alors on quitte la boucle
+      }
+    }
+    delay(5);
+  }
+}
