@@ -1,21 +1,31 @@
 void loop() {
   // put your main code here, to run repeatedly:
-    
-  while (Blt.available() > 0) {
-    charac = Blt.read();
+  if (Serial.available() > 0 ) {
+    charac = Serial.read();
     recep(charac);
   }
-  while (Serial.available() > 0) {
-    charac2 = Serial.read();
-    //Blt.print( charac2 );
-    //recep(charac);
+
+  if (getTemperature(&temperatureInterieur, 2, true) != READ_OK) {
+    Serial.println(F("Erreur de lecture du capteur"));
+    return;
   }
-  while (gps.available() > 0) {
-    if (gps.read() == '$') {
-      if (getGPSPos(&latitude, &longitude) == GPS_SUCCES) {
-        break; // si on a obtenu une nouvelle pos GPS alors on quitte la boucle
-      }
-    }
-    delay(5);
+
+  /* Affiche la température */
+  Serial.print(F("Temperature 1 : "));
+  Serial.print(temperatureInterieur, 2);
+  Serial.write(176); // Caractère degré
+  Serial.write('C');
+  Serial.println();
+
+   /* Lit la température ambiante à ~1Hz */
+  if (getTemperature(&temperatureExterieur, 3, true) != READ_OK) {
+    Serial.println(F("Erreur de lecture du capteur"));
+    return;
   }
+  /* Affiche la température */
+  Serial.print(F("Temperature 2 : "));
+  Serial.print(temperatureExterieur, 2);
+  Serial.write(176); // Caractère degré
+  Serial.write('C');
+  Serial.println();
 }

@@ -1,2 +1,2 @@
-# Drone-marin
-Projet de fin d'année STI2D, c'est un drone marin qui fonctionne avec une remorque, il est pilotable avec une application android, il possédera un mode autonome.
+# Remorque-marine
+Projet final de terminale STI2D, c'est une remorque qui fonctionne dans le cadre d'une architecture maître / esclave, elle attend les ordres du drone marin.

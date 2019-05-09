@@ -1,43 +1,21 @@
-#include <SoftwareSerial.h>
-
-SoftwareSerial gps (7,8);
-SoftwareSerial Blt (11, 12);
-
-float latitude = 0.0;
-float longitude = 0.0;
-float route = 0.0;
+#include <SD.h>
+#include <SPI.h>
+#include <OneWire.h>
 
 char charac;
-char charac2;
-int vitesse = 250;
-int vitesseR = 250;
-int IN1 = 9;
-int IN2 = 10;
-int IN3 = 2;
-int IN4 = 6;
-int ENA = 3;
-int ENB = 5;
+const byte chipSelect = 4;
 
-double positionsGPS[10];
+float temperatureInterieur;
+float temperatureExterieur;
 
-enum GPS_CODES {
-  GPS_SUCCES, 
-  GPS_FAILURE
+enum DS18B20_RCODES {
+  READ_OK,  // Lecture ok
+  NO_SENSOR_FOUND,  // Pas de capteur
+  INVALID_ADDRESS,  // Adresse reçue invalide
+  INVALID_SENSOR  // Capteur invalide (pas un DS18B20)
 };
 
-// functions prototypes
-int isGPRMC(String trameGPS);
-float parseLat(String latrame);
-float parseLong(String latrame);
-float parseRoute(String latrame);
-int getGPSPos (float *lati, float *longi);
-
-String getStringPartByNr(String data, char separator, int index);
-
-void avant();
-void arriere();
-void droite();
-void gauche();
-void Stop();
+// functions prototype
 void recep (char lettre);
-void emptyBuffer ();
+
+byte getTemperature(float *temperature, byte pinTemp, byte reset_search);

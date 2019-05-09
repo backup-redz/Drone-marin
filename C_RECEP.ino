@@ -1,56 +1,42 @@
 void recep (char lettre) {
-  delay(10);
+  delay(15);
   switch (lettre) {
-    case'z':
-    avant();
-    break;
-    case's':
-    arriere();
-    break;
-    case'q':
-    droite();
-    break;
-    case'd':
-    gauche();
-    break;
-    case'S':
-    Stop();
-    break;
-    
     case 'E':
     {
-      char localCharac;
-      Serial.print('E');
-      while (Blt.available() > 0 ) {
-        delay(8); // etre sur de recevoir le prochain char
-        localCharac = Blt.read();
-        Serial.print(localCharac);
-        if (localCharac == '$') {
+      File dataFile = SD.open("data.txt", FILE_WRITE);
+      char localCharac = '\0';
+      char str[100];
+      byte count = 0;
+      while (Serial.available() > 0 ) {
+        localCharac = Serial.read();
+        str[count] = localCharac;
+        count++;
+        if (count == 98 || localCharac == '$') {
           break;
         }
+        delay(15);
+      }
+      str[count] = '\0';
+      String string1 = String(str);
+      
+      if (dataFile) {
+        dataFile.println(string1);
+        dataFile.close();
+        Serial.println("Einfos saved : $");
       }
     }
     break;
-    case 'G':
-    {
-      String cekejeresoi = "";
-      char localCharac;
-      while (Blt.available() > 0 ) {
-        delay(8); // etre sur de recevoir le prochain char
-        localCharac = Blt.read();
-        if (localCharac == '$') {
-          break;
-        }
-        cekejeresoi.concat(localCharac);
-      }
-      for (int i = 0; i < 5; i++) {
-        positionsGPS[i*2] = getStringPartByNr(getStringPartByNr(cekejeresoi, ';', i), ',', 0).toDouble();
-        positionsGPS[i*2+1] = getStringPartByNr(getStringPartByNr(cekejeresoi, ';', i), ',', 1).toDouble();
-      }
-    }
-    break;
+
     case 'I':
-      Serial.print('I');
+    {
+      File dataFile = SD.open("data.txt", FILE_READ);
+      Serial.print("Electure de data.txt\n");
+      while (dataFile.available()) {
+        Serial.write(dataFile.read());
+      }
+      dataFile.close();
+      Serial.print("$");
+    }
     break;
   }
 }
