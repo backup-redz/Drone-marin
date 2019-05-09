@@ -64,9 +64,9 @@ int getGPSPos (float *lati, float *longi) {
       latitude = parseLat(trame);
       longitude = parseLong(trame);
       route = parseRoute(trame);
-      Serial.println("pos updated :");
-      Serial.print(latitude, 5); Serial.print(",");
-      Serial.println(longitude, 5);
+      //Serial.println("pos updated :");
+      //Serial.print(latitude, 5); Serial.print(",");
+      //Serial.println(longitude, 5);
       return GPS_SUCCES;
     }
   }

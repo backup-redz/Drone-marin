@@ -1,42 +1,61 @@
-void recep (char lettre) {
-  delay(15);
+void recep (char lettre) { // bluetooth
+  delay(10);
   switch (lettre) {
+    case'z':
+    avant();
+    break;
+    case's':
+    arriere();
+    break;
+    case'q':
+    droite();
+    break;
+    case'd':
+    gauche();
+    break;
+    case'K':
+    Stop();
+    break;
+    
     case 'E':
     {
-      File dataFile = SD.open("data.txt", FILE_WRITE);
-      char localCharac = '\0';
-      char str[100];
-      byte count = 0;
-      while (Serial.available() > 0 ) {
-        localCharac = Serial.read();
-        str[count] = localCharac;
-        count++;
-        if (count == 98 || localCharac == '$') {
+      char localCharac;
+      commun.print('E');
+      while (Blt.available() > 0 ) {
+        delay(8); // etre sur de recevoir le prochain char
+        localCharac = Blt.read();
+        commun.print(localCharac);
+        if (localCharac == '$') {
           break;
         }
-        delay(15);
-      }
-      str[count] = '\0';
-      String string1 = String(str);
-      
-      if (dataFile) {
-        dataFile.println(string1);
-        dataFile.close();
-        Serial.println("Einfos saved : $");
       }
     }
     break;
-
-    case 'I':
+    case 'G':
     {
-      File dataFile = SD.open("data.txt", FILE_READ);
-      Serial.print("Electure de data.txt\n");
-      while (dataFile.available()) {
-        Serial.write(dataFile.read());
+      String cekejeresoi = "";
+      char localCharac;
+      while (Blt.available() > 0 ) {
+        delay(8); // etre sur de recevoir le prochain char
+        localCharac = Blt.read();
+        if (localCharac == '$') {
+          break;
+        }
+        cekejeresoi.concat(localCharac);
       }
-      dataFile.close();
-      Serial.print("$");
+      for (int i = 0; i < 5; i++) {
+        positionsGPS[i*2] = getStringPartByNr(getStringPartByNr(cekejeresoi, ';', i), ',', 0).toDouble();
+        positionsGPS[i*2+1] = getStringPartByNr(getStringPartByNr(cekejeresoi, ';', i), ',', 1).toDouble();
+        /*commun.print("Lat : ");
+        commun.println(positionsGPS[i*2]);
+        commun.print("Long : ");
+        commun.println(positionsGPS[i*2+1]);*/
+      }
     }
+    break;
+    case 'Q':
+      Serial.println("Q sent");
+      commun.print('Q');
     break;
   }
 }
