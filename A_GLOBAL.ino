@@ -1,7 +1,7 @@
 #include <SoftwareSerial.h>
 
-SoftwareSerial commun (13, 4);
-SoftwareSerial gps (7,8);
+SoftwareSerial commun (13, 6);
+SoftwareSerial gps (7, 8);
 SoftwareSerial Blt (11, 12);
 
 float latitude = 0.0;
@@ -12,17 +12,17 @@ char charac;
 char charac2;
 int vitesse = 250;
 int vitesseR = 250;
-int IN1 = 9;
-int IN2 = 10;
-int IN3 = 2;
-int IN4 = 6;
-int ENA = 3;
-int ENB = 5;
+byte IN1 = 9;
+byte IN2 = 10;
+byte IN3 = 2;
+byte IN4 = 6;
+byte ENA = 3;
+byte ENB = 5;
 
 double positionsGPS[10];
 
 enum GPS_CODES {
-  GPS_SUCCES, 
+  GPS_SUCCES,
   GPS_FAILURE
 };
 

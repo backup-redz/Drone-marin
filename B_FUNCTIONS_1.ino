@@ -21,46 +21,42 @@ String getStringPartByNr(String data, char separator, int index) {
 }
 
 void avant() {
-  // for ( vitesse; vitesse < 150 ; vitesse++) {
-  for (int i=79 ; i < vitesse ; i++) {
-    analogWrite(IN1, LOW);
-    analogWrite(IN2, vitesse);
-    analogWrite(IN3, LOW);
-    analogWrite(IN4, vitesse);
-    delay(1);
-  }
+  analogWrite(ENA, 255);
+  analogWrite(ENB, 255);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
 }
 
 void arriere() {
-  int i;
-  for ( i = 50; i < 150 ; i++) {
-    vitesse = i;
-    analogWrite(IN1, vitesse);
-    analogWrite(IN2, LOW);
-    analogWrite(IN3, vitesse);
-    analogWrite(IN4, LOW);
-    delay(1);
-  }
+  analogWrite(ENA, 255);
+  analogWrite(ENB, 255);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);  
 }
 
 void droite() {
-  analogWrite(IN1, vitesseR);
-  analogWrite(IN2, LOW);
-  analogWrite(IN3, LOW);
-  analogWrite(IN4, vitesseR);
+  analogWrite(ENA, 255);
+  analogWrite(ENB, 255);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
 }
 
 void gauche() {
-  analogWrite(IN1, LOW);
-  analogWrite(IN2, vitesseR);
-  analogWrite(IN3, vitesseR);
-  analogWrite(IN4, LOW);
+  analogWrite(ENA, 255);
+  analogWrite(ENB, 255);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
 }
 
 void Stop() {
-  digitalWrite(ENA, HIGH);
-  digitalWrite(ENB, HIGH);
-  delay(1);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, LOW);
   digitalWrite(IN3, LOW);

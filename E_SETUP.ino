@@ -13,8 +13,15 @@ void setup() {
   pinMode(ENB,OUTPUT);
 
   avant();
+  Serial.println("avant");
   delay(500);
+  Serial.println("arriere");
   arriere();
   delay(500);
+  Serial.println("droite");
+  droite();
+  delay(500);
+  Serial.println("stop");
   Stop();
+  Serial.println("Le programme se lance !");
 }

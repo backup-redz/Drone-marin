@@ -50,6 +50,8 @@ int getGPSPos (float *lati, float *longi) {
   byte trameLength = 1;
   delay(10);
   while (gps.available() > 0 && gps.peek() != '$' && gps.peek() != '*') {
+    delay(7);
+    Serial.print(gps.peek());
     trame.concat(gps.read());
     trameLength++;
     if (trameLength > 147) {
@@ -64,11 +66,12 @@ int getGPSPos (float *lati, float *longi) {
       latitude = parseLat(trame);
       longitude = parseLong(trame);
       route = parseRoute(trame);
-      //Serial.println("pos updated :");
-      //Serial.print(latitude, 5); Serial.print(",");
-      //Serial.println(longitude, 5);
+      Serial.println("pos updated :");
+      Serial.print(latitude, 5); Serial.print(",");
+      Serial.println(longitude, 5);
       return GPS_SUCCES;
     }
   }
+  Serial.println("gps Failure");
   return GPS_FAILURE;
 }
