@@ -1,6 +1,5 @@
 #include <SoftwareSerial.h>
-
-SoftwareSerial commun (6, 13);
+SoftwareSerial commun (A0, A1);
 SoftwareSerial gps (7, 8);
 SoftwareSerial Blt (11, 12);
 

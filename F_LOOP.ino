@@ -5,9 +5,10 @@ void loop() {
     charac = Blt.read();
     recep(charac);
   }
-  while (commun.available() > 0) {
+  commun.listen();
+  if (commun.available() > 0) {
     charac2 = commun.read();
-    recep_slave(charac);
+    recep_slave(charac2);
   }
   while (gps.available() > 0) {
     Serial.print(gps.peek());
@@ -17,5 +18,8 @@ void loop() {
       }
     }
     delay(5);
+  }
+  if (Serial.available() > 0) {
+    commun.write(Serial.read());
   }
 }

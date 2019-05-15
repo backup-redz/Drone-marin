@@ -1,6 +1,6 @@
 void recep_slave (char lettre) { // commun
-  Serial.println("on recoit du commun");
-  Serial.println(lettre);
+  
+  Serial.print(lettre);
   delay(10);
   switch (lettre) {
     case 'Q':
