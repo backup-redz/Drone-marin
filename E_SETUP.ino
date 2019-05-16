@@ -1,9 +1,7 @@
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  commun.begin(9600);
   gps.begin(9600);
-  Blt.begin(9600);
 
   pinMode(IN1,OUTPUT);
   pinMode(IN2,OUTPUT);
@@ -13,15 +11,18 @@ void setup() {
   pinMode(ENB,OUTPUT);
 
   avant();
-  Serial.println("avant");
+  debug("avant");
   delay(500);
-  Serial.println("arriere");
+  debug("arriere");
   arriere();
   delay(500);
-  Serial.println("droite");
+  debug("droite");
   droite();
   delay(500);
-  Serial.println("stop");
+  debug("gauche");
+  gauche();
+  delay(500);
+  debug("STOP");
   Stop();
-  Serial.println("Le programme se lance !");
+  debug("Le programme se lance !");  
 }

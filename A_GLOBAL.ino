@@ -1,22 +1,16 @@
 #include <SoftwareSerial.h>
-SoftwareSerial commun (A0, A1);
-SoftwareSerial gps (7, 8);
-SoftwareSerial Blt (11, 12);
+SoftwareSerial gps (5, 6);
 
 float latitude = 0.0;
 float longitude = 0.0;
 float route = 0.0;
 
-char charac;
-char charac2;
-int vitesse = 250;
-int vitesseR = 250;
-byte IN1 = 9;
-byte IN2 = 10;
-byte IN3 = 2;
-byte IN4 = 6;
-byte ENA = 3;
-byte ENB = 5;
+byte IN1 = 13;
+byte IN2 = 12;
+byte IN3 = 11;
+byte IN4 = 8;
+byte ENA = 10;
+byte ENB = 9;
 
 double positionsGPS[10];
 

@@ -64,3 +64,11 @@ void Stop() {
   digitalWrite(ENA, LOW);
   digitalWrite(ENB, LOW);
 }
+
+void debug(String str) {
+  Serial.println('B');
+  Serial.println("drone");
+  Serial.println(str);
+  Serial.print('$');
+}
+
