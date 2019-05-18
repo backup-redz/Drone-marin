@@ -5,22 +5,22 @@ void recep (char lettre) { // Serial
   
   delay(10);
   switch (lettre) {
-    case'z':
-    avant();
+    case 'z':
+      avant();
     break;
-    case's':
-    arriere();
+    case 's':
+      arriere();
     break;
-    case'q':
-    droite();
+    case 'q':
+      droite();
     break;
-    case'd':
-    gauche();
+    case 'd':
+      gauche();
     break;
-    case'K':
-    Stop();
+    case 'K':
+      Stop();
     break;
-    case 'G': 
+    case 'P': // get GPS position
       updateGPS();
     break;
     case 'B':
