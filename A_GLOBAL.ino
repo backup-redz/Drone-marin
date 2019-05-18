@@ -35,4 +35,3 @@ void droite();
 void gauche();
 void Stop();
 void recep (char lettre);
-void emptyBuffer ();
