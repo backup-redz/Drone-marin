@@ -20,6 +20,9 @@ void recep (char lettre) { // Serial
     case'K':
     Stop();
     break;
+    case 'G': 
+      updateGPS();
+    break;
     case 'B':
     {
       while (Serial.available() > 0) {

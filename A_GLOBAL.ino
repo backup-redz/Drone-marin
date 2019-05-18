@@ -25,6 +25,7 @@ float parseLat(String latrame);
 float parseLong(String latrame);
 float parseRoute(String latrame);
 int getGPSPos (float *lati, float *longi);
+void updateGPS();
 
 String getStringPartByNr(String data, char separator, int index);
 

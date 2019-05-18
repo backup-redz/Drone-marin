@@ -44,7 +44,7 @@ float parseRoute(String latrame) {
   return routeStr.toFloat();
 }
 
-int getGPSPos (float *lati, float *longi) {
+int getGPSPos (float *lati, float *longi, float *route) {
   
   String trame = "$";
   byte trameLength = 1;
@@ -62,9 +62,9 @@ int getGPSPos (float *lati, float *longi) {
   if (trameLength != 0) { // si tout c'est bien passe
     trameLength = 0;
     if (isGPRMC(trame)) {
-      latitude = parseLat(trame);
-      longitude = parseLong(trame);
-      route = parseRoute(trame);
+      *lati = parseLat(trame);
+      *longi = parseLong(trame);
+      *route = parseRoute(trame);
       //Serial.println('B');
       //Serial.print(latitude, 5); Serial.print(", ");
       //Serial.println(longitude, 5);
@@ -75,4 +75,17 @@ int getGPSPos (float *lati, float *longi) {
   //debug("gps failure...");
   gps.flush();
   return GPS_FAILURE;
+}
+
+void updateGPS() {
+  delay(100);
+  while (gps.available() > 0) {
+    //Serial.print(gps.peek());
+    if (gps.read() == '$') {
+      if (getGPSPos(&latitude, &longitude, &route) == GPS_SUCCES) {
+        break; // si on a obtenu une nouvelle pos GPS alors on quitte la boucle
+      }
+    }
+    delay(15);    
+  }
 }
