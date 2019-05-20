@@ -1,4 +1,8 @@
 void recep (char lettre) { // Serial
+  
+  if (lettre == ' ') {
+    return;
+  }
   if (lettre != 'B') {
      debug(String(lettre)); 
   }
@@ -25,9 +29,10 @@ void recep (char lettre) { // Serial
     break;
     case 'B':
     {
-      while (Serial.available() > 0) {
+      while (true) {
         delay(10);
-        if (Serial.read() == '$') {
+        char test = Serial.read();
+        if (test == '$') {
           break;
         }
       }

@@ -65,10 +65,11 @@ int getGPSPos (float *lati, float *longi, float *route) {
       *lati = parseLat(trame);
       *longi = parseLong(trame);
       *route = parseRoute(trame);
-      //Serial.println('B');
-      //Serial.print(latitude, 5); Serial.print(", ");
-      //Serial.println(longitude, 5);
-      //Serial.print('$');
+      Serial.print("B ");
+      Serial.print(latitude, 5); Serial.print(", ");
+      Serial.print(longitude, 5); Serial.print(" ");
+      Serial.print(*route);
+      Serial.println(" $");
       return GPS_SUCCES;
     }
   }
@@ -80,12 +81,12 @@ int getGPSPos (float *lati, float *longi, float *route) {
 void updateGPS() {
   delay(100);
   while (gps.available() > 0) {
-    //Serial.print(gps.peek());
+    //char charaaa = gps.peek();
+    //Serial.print(charaaa);
     if (gps.read() == '$') {
       if (getGPSPos(&latitude, &longitude, &route) == GPS_SUCCES) {
         break; // si on a obtenu une nouvelle pos GPS alors on quitte la boucle
       }
-    }
-    delay(15);    
+    }  
   }
 }

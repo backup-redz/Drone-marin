@@ -66,9 +66,9 @@ void Stop() {
 }
 
 void debug(String str) {
-  Serial.print('B ');
-  Serial.print("drone : ");
-  Serial.print(str);
-  Serial.print(' $');
+  //Serial.print('B');
+  //Serial.print(" drone : ");
+  //Serial.print(str);
+  //Serial.println(" $");
 }
 
