@@ -27,6 +27,11 @@ void avant() {
   digitalWrite(IN2, HIGH);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
+  for (int i = 255; i > 80; i--) {
+    analogWrite(ENA, i);
+    analogWrite(ENB, i);
+    delay(2);
+  }
 }
 
 void arriere() {
@@ -36,6 +41,11 @@ void arriere() {
   digitalWrite(IN2, LOW);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);  
+  for (int i = 255; i > 80; i--) {
+    analogWrite(ENA, i);
+    analogWrite(ENB, i);
+    delay(2);
+  }
 }
 
 void droite() {
@@ -45,6 +55,11 @@ void droite() {
   digitalWrite(IN2, LOW);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
+  for (int i = 255; i > 80; i--) {
+    analogWrite(ENA, i);
+    analogWrite(ENB, i);
+    delay(2);
+  }
 }
 
 void gauche() {
@@ -54,6 +69,11 @@ void gauche() {
   digitalWrite(IN2, HIGH);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
+  for (int i = 255; i > 80; i--) {
+    analogWrite(ENA, i);
+    analogWrite(ENB, i);
+    delay(2);
+  }
 }
 
 void Stop() {
