@@ -21,69 +21,79 @@ String getStringPartByNr(String data, char separator, int index) {
 }
 
 void avant() {
-  analogWrite(ENA, 255);
-  analogWrite(ENB, 255);
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
-  for (int i = 255; i > 80; i--) {
-    analogWrite(ENA, i);
-    analogWrite(ENB, i);
-    delay(2);
-  }
+  usMotor_Status = CW;
+  motorGo(MOTOR_1, usMotor_Status, usSpeed);
+  motorGo(MOTOR_2, usMotor_Status, usSpeed);
 }
 
 void arriere() {
-  analogWrite(ENA, 255);
-  analogWrite(ENB, 255);
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);  
-  for (int i = 255; i > 80; i--) {
-    analogWrite(ENA, i);
-    analogWrite(ENB, i);
-    delay(2);
-  }
+  usMotor_Status = CCW;
+  motorGo(MOTOR_1, usMotor_Status, usSpeed);
+  motorGo(MOTOR_2, usMotor_Status, usSpeed);
 }
 
 void droite() {
-  analogWrite(ENA, 255);
-  analogWrite(ENB, 255);
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
-  for (int i = 255; i > 80; i--) {
-    analogWrite(ENA, i);
-    analogWrite(ENB, i);
-    delay(2);
-  }
+  usMotor_Status = CW;
+  motorGo(MOTOR_1, BRAKE, usSpeed);
+  motorGo(MOTOR_2, usMotor_Status, usSpeed);
 }
 
 void gauche() {
-  analogWrite(ENA, 255);
-  analogWrite(ENB, 255);
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
-  for (int i = 255; i > 80; i--) {
-    analogWrite(ENA, i);
-    analogWrite(ENB, i);
-    delay(2);
-  }
+  usMotor_Status = CW;
+  motorGo(MOTOR_1, usMotor_Status, usSpeed);
+  motorGo(MOTOR_2, BRAKE, usSpeed);
 }
 
 void Stop() {
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, LOW);
-  digitalWrite(ENA, LOW);
-  digitalWrite(ENB, LOW);
+  usMotor_Status = BRAKE;
+  motorGo(MOTOR_1, usMotor_Status, 0);
+  motorGo(MOTOR_2, usMotor_Status, 0);
 }
+
+void motorGo(uint8_t motor, uint8_t direct, uint8_t pwm)         //Function that controls the variables: motor(0 ou 1), direction (cw ou ccw) e pwm (entra 0 e 255);
+{
+  if (motor == MOTOR_1)
+  {
+    if (direct == CW)
+    {
+      digitalWrite(MOTOR_A1_PIN, LOW);
+      digitalWrite(MOTOR_B1_PIN, HIGH);
+    }
+    else if (direct == CCW)
+    {
+      digitalWrite(MOTOR_A1_PIN, HIGH);
+      digitalWrite(MOTOR_B1_PIN, LOW);
+    }
+    else
+    {
+      digitalWrite(MOTOR_A1_PIN, LOW);
+      digitalWrite(MOTOR_B1_PIN, LOW);
+    }
+
+    analogWrite(PWM_MOTOR_1, pwm);
+  }
+  else if (motor == MOTOR_2)
+  {
+    if (direct == CW)
+    {
+      digitalWrite(MOTOR_A2_PIN, LOW);
+      digitalWrite(MOTOR_B2_PIN, HIGH);
+    }
+    else if (direct == CCW)
+    {
+      digitalWrite(MOTOR_A2_PIN, HIGH);
+      digitalWrite(MOTOR_B2_PIN, LOW);
+    }
+    else
+    {
+      digitalWrite(MOTOR_A2_PIN, LOW);
+      digitalWrite(MOTOR_B2_PIN, LOW);
+    }
+
+    analogWrite(PWM_MOTOR_2, pwm);
+  }
+}
+
 
 void debug(String str) {
   //Serial.print('B');
