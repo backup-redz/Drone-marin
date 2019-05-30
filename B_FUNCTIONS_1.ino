@@ -21,24 +21,36 @@ String getStringPartByNr(String data, char separator, int index) {
 }
 
 void avant() {
+  Serial.print("AV");
+  digitalWrite(EN_PIN_1, HIGH);
+  digitalWrite(EN_PIN_2, HIGH);
   usMotor_Status = CW;
   motorGo(MOTOR_1, usMotor_Status, usSpeed);
   motorGo(MOTOR_2, usMotor_Status, usSpeed);
 }
 
 void arriere() {
+  Serial.print("AR");
+  digitalWrite(EN_PIN_1, HIGH);
+  digitalWrite(EN_PIN_2, HIGH);
   usMotor_Status = CCW;
   motorGo(MOTOR_1, usMotor_Status, usSpeed);
   motorGo(MOTOR_2, usMotor_Status, usSpeed);
 }
 
 void droite() {
+  Serial.print("DR");
+  digitalWrite(EN_PIN_1, HIGH);
+  digitalWrite(EN_PIN_2, HIGH);
   usMotor_Status = CW;
   motorGo(MOTOR_1, BRAKE, usSpeed);
   motorGo(MOTOR_2, usMotor_Status, usSpeed);
 }
 
 void gauche() {
+  Serial.print("LE");
+  digitalWrite(EN_PIN_1, HIGH);
+  digitalWrite(EN_PIN_2, HIGH);
   usMotor_Status = CW;
   motorGo(MOTOR_1, usMotor_Status, usSpeed);
   motorGo(MOTOR_2, BRAKE, usSpeed);
@@ -101,4 +113,3 @@ void debug(String str) {
   //Serial.print(str);
   //Serial.println(" $");
 }
-

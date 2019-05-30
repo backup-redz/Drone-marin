@@ -1,8 +1,6 @@
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
-  gps.begin(9600);
-
+  
   pinMode(MOTOR_A1_PIN, OUTPUT);
   pinMode(MOTOR_B1_PIN, OUTPUT);
 
@@ -17,6 +15,9 @@ void setup() {
 
   pinMode(EN_PIN_1, OUTPUT);
   pinMode(EN_PIN_2, OUTPUT);
+
+  Serial.begin(9600);
+  gps.begin(9600);
 
   avant();
   debug("avant");

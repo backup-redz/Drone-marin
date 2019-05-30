@@ -1,10 +1,9 @@
 void recep (char lettre) { // Serial
   
-  if (lettre == ' ') {
-    return;
-  }
   if (lettre != 'B') {
-     debug(String(lettre)); 
+     //debug(String(lettre)); 
+     //Serial.print("on recoit ");
+     //Serial.println(lettre);
   }
   
   delay(10);
