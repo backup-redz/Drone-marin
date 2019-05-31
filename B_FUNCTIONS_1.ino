@@ -113,3 +113,39 @@ void debug(String str) {
   //Serial.print(str);
   //Serial.println(" $");
 }
+
+float eucliDist(float x1, float y1, float x2, float y2) {
+  float dX = x1 - x2;
+  float dY = y1 - y2;
+  return 100000 * sqrt((dX*dX)+(dY*dY));
+}
+
+float degToRad (float degr) {
+  return (degr * 1000) / 57296;
+}
+
+float radToDeg(float rad) {
+  return (rad * 57296) / 1000;
+}
+
+int8_t sign(int val) {
+  if (val < 0) return -1;
+  if (val > 0) return 1;
+  return 0;
+}
+
+float my_acos(float x)
+{
+  float negate = float(x < 0);
+  float ret = -0.0187293;
+  x = abs(x);
+  ret = x * -0.0187293;
+  ret += 0.0742610;
+  ret *= x;
+  ret -= 0.2121144;
+  ret *= x;
+  ret += 1.5707288;
+  ret *= sqrt(1.0 - x);
+  ret = ret - 2.0 * negate * ret;
+  return negate * 3.14159265358979 + ret;
+}

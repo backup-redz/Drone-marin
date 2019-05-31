@@ -5,7 +5,17 @@ float latitude = 0.0;
 float longitude = 0.0;
 float route = 0.0;
 
+float targetX = 0.0;
+float targetY = 0.0;
+
 double positionsGPS[10];
+
+enum AUTONOMOUS_MODE {
+  ENABLED,
+  DISABLED
+};
+
+int autonomous = DISABLED;
 
 enum GPS_CODES {
   GPS_SUCCES,
