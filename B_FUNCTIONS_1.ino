@@ -21,7 +21,7 @@ String getStringPartByNr(String data, char separator, int index) {
 }
 
 void avant() {
-  Serial.print("AV");
+  debug("avant");
   digitalWrite(EN_PIN_1, HIGH);
   digitalWrite(EN_PIN_2, HIGH);
   usMotor_Status = CW;
@@ -30,7 +30,7 @@ void avant() {
 }
 
 void arriere() {
-  Serial.print("AR");
+  debug("arriere");
   digitalWrite(EN_PIN_1, HIGH);
   digitalWrite(EN_PIN_2, HIGH);
   usMotor_Status = CCW;
@@ -39,7 +39,7 @@ void arriere() {
 }
 
 void droite() {
-  Serial.print("DR");
+  debug("droite");
   digitalWrite(EN_PIN_1, HIGH);
   digitalWrite(EN_PIN_2, HIGH);
   usMotor_Status = CW;
@@ -48,7 +48,7 @@ void droite() {
 }
 
 void gauche() {
-  Serial.print("LE");
+  debug("gauche");
   digitalWrite(EN_PIN_1, HIGH);
   digitalWrite(EN_PIN_2, HIGH);
   usMotor_Status = CW;
@@ -108,10 +108,9 @@ void motorGo(uint8_t motor, uint8_t direct, uint8_t pwm)         //Function that
 
 
 void debug(String str) {
-  //Serial.print('B');
-  //Serial.print(" drone : ");
-  //Serial.print(str);
-  //Serial.println(" $");
+  Serial.print('B');
+  Serial.print(str);
+  Serial.print('$');
 }
 
 float eucliDist(float x1, float y1, float x2, float y2) {
@@ -134,8 +133,7 @@ int8_t sign(int val) {
   return 0;
 }
 
-float my_acos(float x)
-{
+float my_acos(float x) {
   float negate = float(x < 0);
   float ret = -0.0187293;
   x = abs(x);

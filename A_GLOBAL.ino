@@ -67,3 +67,11 @@ void recep (char lettre);
 short usSpeed = 150;  //default motor speed
 unsigned short usMotor_Status = BRAKE;
 void motorGo(uint8_t motor, uint8_t direct, uint8_t pwm);
+
+void debug(String str);
+
+float eucliDist(float x1, float y1, float x2, float y2);
+float degToRad (float degr);
+float radToDeg(float rad);
+int8_t sign(int val);
+float my_acos(float x);

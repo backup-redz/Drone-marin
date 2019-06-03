@@ -10,8 +10,16 @@ void recep (char lettre) { // Serial
   switch (lettre) {
     case 'A': // autonomous mode
       {
+        autonomous = ENABLED;
+        updateGPS();
+        avant();
+      }
+    break;
+    case 'G':
+      {
         String cekejeresoi = "";
         char localCharac;
+        
         while (Serial.available() > 0 ) {
           delay(8); // etre sur de recevoir le prochain char
           localCharac = Serial.read();
@@ -20,11 +28,23 @@ void recep (char lettre) { // Serial
           }
           cekejeresoi.concat(localCharac);
         }
-        targetY = getStringPartByNr(cekejeresoi, ',', 1).toDouble();
-        targetX = getStringPartByNr(cekejeresoi, ',', 1).toDouble();
-        autonomous = ENABLED;
-        updateGPS();
-        avant();
+        targetY = cekejeresoi.toDouble();
+      }
+    break;
+    case 'H':
+      {
+        String cekejeresoi = "";
+        char localCharac;
+        
+        while (Serial.available() > 0 ) {
+          delay(8); // etre sur de recevoir le prochain char
+          localCharac = Serial.read();
+          if (localCharac == '$') {
+            break;
+          }
+          cekejeresoi.concat(localCharac);
+        }
+        targetX = cekejeresoi.toDouble();
       }
     break;
     case 'z':

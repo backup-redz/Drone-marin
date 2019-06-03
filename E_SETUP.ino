@@ -20,18 +20,13 @@ void setup() {
   gps.begin(9600);
 
   avant();
-  debug("avant");
   delay(500);
-  debug("arriere");
   arriere();
   delay(500);
-  debug("droite");
   droite();
   delay(500);
-  debug("gauche");
   gauche();
   delay(500);
-  debug("STOP");
   Stop();
   debug("Le programme se lance !");  
 }

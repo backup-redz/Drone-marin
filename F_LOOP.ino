@@ -9,15 +9,20 @@ void loop() {
   } else {
     updateGPS();
     float distance = eucliDist(longitude, latitude, targetX, targetY);
+    Serial.print("B dist eucli : ");
+    Serial.print(distance);
+    Serial.print('$');
+    
     if (distance < 10) {
       Stop();
+      autonomous = DISABLED;
       Serial.print('*'); // lancer la pompe
     } else {
       int tRoute = (int) route;
       int angle = (450 - tRoute) % 360;
 
-      float v1_x = cos(angle) * 50;
-      float v1_y = latitude - (sin(angle) * 50) - latitude;
+      float v1_x = cos(degToRad(angle)) * 50;
+      float v1_y = latitude - (sin(degToRad(angle)) * 50) - latitude;
 
       float v2_x = targetX - longitude;
       float v2_y = targetY - latitude;
@@ -35,6 +40,10 @@ void loop() {
 
       int8_t orientation = sign((bX - aX) * (mY - aY) - (bY - aY) * (mX - aX)) * -1;
       angleToGoal *= orientation;
+
+      Serial.print("B angle : ");
+      Serial.print(angleToGoal);
+      Serial.print('$');
 
       if ( angleToGoal < -5) {
         droite();
