@@ -20,9 +20,11 @@ void loop() {
     } else {
       int tRoute = (int) route;
       int angle = (450 - tRoute) % 360;
-
-      float v1_x = cos(degToRad(angle)) * 50;
-      float v1_y = latitude - (sin(degToRad(angle)) * 50) - latitude;
+      
+      float point1_X = longitude + ( cos(degToRad(angle)) * 50 );
+      float point1_Y = latitude + ( sin(degToRad(angle)) * 50 );
+      float v1_x = point1_X - longitude;
+      float v1_y = point1_Y - latitude;
 
       float v2_x = targetX - longitude;
       float v2_y = targetY - latitude;

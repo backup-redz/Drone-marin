@@ -56,7 +56,7 @@ void recep (char lettre);
 #define PWM_MOTOR_2 6
 
 #define CURRENT_SEN_1 A2
-#define CURRENT_SEN_2 A3
+#define CURRENT_SEN_2 A3 
 
 #define EN_PIN_1 A0
 #define EN_PIN_2 A1
@@ -64,7 +64,7 @@ void recep (char lettre);
 #define MOTOR_1 0
 #define MOTOR_2 1
 
-short usSpeed = 150;  //default motor speed
+short usSpeed = 40;  //default motor speed
 unsigned short usMotor_Status = BRAKE;
 void motorGo(uint8_t motor, uint8_t direct, uint8_t pwm);
 

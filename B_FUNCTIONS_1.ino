@@ -82,7 +82,14 @@ void motorGo(uint8_t motor, uint8_t direct, uint8_t pwm)         //Function that
       digitalWrite(MOTOR_B1_PIN, LOW);
     }
 
-    analogWrite(PWM_MOTOR_1, pwm);
+    if (pwm == 0) {
+      analogWrite(PWM_MOTOR_1, 0);
+    } else {
+      for (int i = pwm; i > 20; i--) {
+        analogWrite(PWM_MOTOR_1, i);
+        delay(2);
+      }
+    }
   }
   else if (motor == MOTOR_2)
   {
@@ -102,7 +109,15 @@ void motorGo(uint8_t motor, uint8_t direct, uint8_t pwm)         //Function that
       digitalWrite(MOTOR_B2_PIN, LOW);
     }
 
-    analogWrite(PWM_MOTOR_2, pwm);
+    if (pwm == 0) {
+      analogWrite(PWM_MOTOR_2, 0);
+    } else {
+      for (int i = pwm; i > 20; i--) {
+        analogWrite(PWM_MOTOR_2, i);
+        delay(2);
+      }
+    }
+
   }
 }
 
