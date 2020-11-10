@@ -5,7 +5,17 @@ float latitude = 0.0;
 float longitude = 0.0;
 float route = 0.0;
 
+float targetX = 0.0;
+float targetY = 0.0;
+
 double positionsGPS[10];
+
+enum AUTONOMOUS_MODE {
+  ENABLED,
+  DISABLED
+};
+
+int autonomous = DISABLED;
 
 enum GPS_CODES {
   GPS_SUCCES,
@@ -46,7 +56,7 @@ void recep (char lettre);
 #define PWM_MOTOR_2 6
 
 #define CURRENT_SEN_1 A2
-#define CURRENT_SEN_2 A3
+#define CURRENT_SEN_2 A3 
 
 #define EN_PIN_1 A0
 #define EN_PIN_2 A1
@@ -54,6 +64,14 @@ void recep (char lettre);
 #define MOTOR_1 0
 #define MOTOR_2 1
 
-short usSpeed = 150;  //default motor speed
+short usSpeed = 40;  //default motor speed
 unsigned short usMotor_Status = BRAKE;
 void motorGo(uint8_t motor, uint8_t direct, uint8_t pwm);
+
+void debug(String str);
+
+float eucliDist(float x1, float y1, float x2, float y2);
+float degToRad (float degr);
+float radToDeg(float rad);
+int8_t sign(int val);
+float my_acos(float x);

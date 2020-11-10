@@ -21,7 +21,7 @@ String getStringPartByNr(String data, char separator, int index) {
 }
 
 void avant() {
-  Serial.print("AV");
+  debug("avant");
   digitalWrite(EN_PIN_1, HIGH);
   digitalWrite(EN_PIN_2, HIGH);
   usMotor_Status = CW;
@@ -30,7 +30,7 @@ void avant() {
 }
 
 void arriere() {
-  Serial.print("AR");
+  debug("arriere");
   digitalWrite(EN_PIN_1, HIGH);
   digitalWrite(EN_PIN_2, HIGH);
   usMotor_Status = CCW;
@@ -39,7 +39,7 @@ void arriere() {
 }
 
 void droite() {
-  Serial.print("DR");
+  debug("droite");
   digitalWrite(EN_PIN_1, HIGH);
   digitalWrite(EN_PIN_2, HIGH);
   usMotor_Status = CW;
@@ -48,7 +48,7 @@ void droite() {
 }
 
 void gauche() {
-  Serial.print("LE");
+  debug("gauche");
   digitalWrite(EN_PIN_1, HIGH);
   digitalWrite(EN_PIN_2, HIGH);
   usMotor_Status = CW;
@@ -82,7 +82,14 @@ void motorGo(uint8_t motor, uint8_t direct, uint8_t pwm)         //Function that
       digitalWrite(MOTOR_B1_PIN, LOW);
     }
 
-    analogWrite(PWM_MOTOR_1, pwm);
+    if (pwm == 0) {
+      analogWrite(PWM_MOTOR_1, 0);
+    } else {
+      for (int i = pwm; i > 20; i--) {
+        analogWrite(PWM_MOTOR_1, i);
+        delay(2);
+      }
+    }
   }
   else if (motor == MOTOR_2)
   {
@@ -102,14 +109,56 @@ void motorGo(uint8_t motor, uint8_t direct, uint8_t pwm)         //Function that
       digitalWrite(MOTOR_B2_PIN, LOW);
     }
 
-    analogWrite(PWM_MOTOR_2, pwm);
+    if (pwm == 0) {
+      analogWrite(PWM_MOTOR_2, 0);
+    } else {
+      for (int i = pwm; i > 20; i--) {
+        analogWrite(PWM_MOTOR_2, i);
+        delay(2);
+      }
+    }
+
   }
 }
 
 
 void debug(String str) {
-  //Serial.print('B');
-  //Serial.print(" drone : ");
-  //Serial.print(str);
-  //Serial.println(" $");
+  Serial.print('B');
+  Serial.print(str);
+  Serial.print('$');
+}
+
+float eucliDist(float x1, float y1, float x2, float y2) {
+  float dX = x1 - x2;
+  float dY = y1 - y2;
+  return 100000 * sqrt((dX*dX)+(dY*dY));
+}
+
+float degToRad (float degr) {
+  return (degr * 1000) / 57296;
+}
+
+float radToDeg(float rad) {
+  return (rad * 57296) / 1000;
+}
+
+int8_t sign(int val) {
+  if (val < 0) return -1;
+  if (val > 0) return 1;
+  return 0;
+}
+
+float my_acos(float x) {
+  float negate = float(x < 0);
+  float ret = -0.0187293;
+  x = abs(x);
+  ret = x * -0.0187293;
+  ret += 0.0742610;
+  ret *= x;
+  ret -= 0.2121144;
+  ret *= x;
+  ret += 1.5707288;
+  ret *= sqrt(1.0 - x);
+  ret = ret - 2.0 * negate * ret;
+  return negate * 3.14159265358979 + ret;
 }
